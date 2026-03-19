@@ -44,4 +44,4 @@ def etl_function(etlTimer: func.TimerRequest) -> None:
 def check_ip(req: func.HttpRequest) -> func.HttpResponse:
     #This service returns the IP address it sees your request coming from.
     response = requests.get("https://ifconfig.me/ip")
-    return func.HttpResponse(f"Outbound IP: {response.text.strip}")
+    return func.HttpResponse(f"Outbound IP: {response.text.strip()}")
