@@ -1,5 +1,6 @@
 import azure.functions as func
 import logging
+import requests
 
 from etl import extract_data, transform_data, load_data
 
@@ -37,3 +38,10 @@ def etl_function(etlTimer: func.TimerRequest) -> None:
         raise
 
     return blob_name
+
+
+@app.route(route="check-ip")
+def check_ip(req: func.HttpRequest) -> func.HttpResponse:
+    #This service returns the IP address it sees your request coming from.
+    response = requests.get("https://ifconfig.me/ip")
+    return func.HttpResponse(f"Outbound IP: {response.text.strip}")
